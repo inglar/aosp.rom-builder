@@ -1,0 +1,8 @@
+# Provide a default gitconfig to bypass repo init prompts for identity
+[color]
+	ui = auto
+[user]
+	name = AOSP Builder
+	email = builder@aosp.local
+[safe]
+    directory = *

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+  <remote name="custom"
+          fetch="ssh://git@github.com/inglar"
+          revision="refs/heads/lineage-19.1" />
+
+  <!-- Modifying LOS manifests -->
+  <remove-project path="build/make" name="LineageOS/android_build" />
+  <project path="build/make" name="lineageos.android_build" groups="pdk" remote="custom" >
+    <copyfile src="core/root.mk" dest="Makefile" />
+    <linkfile src="CleanSpec.mk" dest="build/CleanSpec.mk" />
+    <linkfile src="buildspec.mk.default" dest="build/buildspec.mk.default" />
+    <linkfile src="core" dest="build/core" />
+    <linkfile src="envsetup.sh" dest="build/envsetup.sh" />
+    <linkfile src="target" dest="build/target" />
+    <linkfile src="tools" dest="build/tools" />
+  </project>
+
+  <remove-project path="build/soong" name="LineageOS/android_build_soong" />
+  <project path="build/soong" name="lineageos.android_build_soong" groups="pdk,tradefed" remote="custom" >
+    <linkfile src="root.bp" dest="Android.bp" />
+    <linkfile src="bootstrap.bash" dest="bootstrap.bash" />
+  </project>
+
+  <remove-project path="frameworks/base" name="LineageOS/android_frameworks_base" />
+  <project path="frameworks/base" name="lineageos.android_frameworks_base" groups="pdk-cw-fs,pdk-fs" remote="custom" />
+
+  <remove-project path="vendor/lineage" name="LineageOS/android_vendor_lineage" />
+  <project path="vendor/lineage" name="lineageos.android_vendor_lineage" remote="custom" />
+
+  <remove-project path="packages/apps/Dialer" name="LineageOS/android_packages_apps_Dialer" />
+  <project path="packages/apps/Dialer" name="lineageos.android_packages_apps_Dialer" remote="custom" />
+
+  <remove-project path="packages/apps/Settings" name="LineageOS/android_packages_apps_Settings" />
+  <project path="packages/apps/Settings" name="lineageos.android_packages_apps_Settings" groups="pdk-fs" remote="custom" />
+
+  <remove-project path="packages/apps/Updater" name="LineageOS/android_packages_apps_Updater" />
+  <project path="packages/apps/Updater" name="lineageos.android_packages_apps_Updater" remote="custom" />
+
+  <!-- Device, kernel, vendor -->
+  <project path="device/xiaomi/sweet" name="sweet_lineageos.device_xiaomi_sweet" remote="custom" />
+  <project path="kernel/xiaomi/sweet" name="arrowos_devices.kernel_xiaomi_sweet" remote="custom" revision="arrow-12.1" />
+  <project path="vendor/xiaomi/sweet" name="sweet_lineageos.vendor_xiaomi_sweet" remote="custom" />
+
+  <!-- MicroG -->
+  <project path="vendor/partner_gms" name="lineageos4microg.android_vendor_partner_gms" remote="custom" revision="master" />
+</manifest>
